@@ -38,7 +38,6 @@
         }
 
         .main-content {
-            margin-left: 260px; 
             padding: 20px;
         }
 
@@ -142,6 +141,9 @@
                 flex: 0 0 100%;
                 max-width: 100%;
             }
+            .sidebar{
+                display: none;
+            }
         }
     </style>
 </head>
@@ -171,36 +173,54 @@
                         <a class="nav-link nav-text" href="cart.html"><i class="fa fa-shopping-cart"
                                 style="font-size:38px;color:rgb(255, 255, 255)"></i></a>
                     </li>
+                    <li>
+
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="sidebar">
-        <h4>Filters</h4>
-        <select id="price-filter" class="form-select">
-            <option value="">Select Price</option>
-            <option value="0-50">$0 - $50</option>
-            <option value="51-100">$51 - $100</option>
-            <option value="101-200">$101 - $200</option>
-            <option value="201+">$201+</option>
-        </select>
-
-        <select id="category-filter" class="form-select">
-            <option value="">Select Category</option>
-            <option value="beauty">Beauty</option>
-            <option value="furniture">Furniture</option>
-            <option value="groceries">Food Groceries</option>
-            <option value="fragrances">Fragrances</option>
-        </select>
-
-        <select id="brand-filter" class="form-select">
-            <option value="">Select Brand</option>
-            <option value="apple">Apple</option>
-            <option value="samsung">Samsung</option>
-            <option value="nike">Nike</option>
-        </select>
-    </div>
+    <div class="offcanvas offcanvas-start z-index-999" id="demo">
+        <div class="offcanvas-header">
+          <h1 class="offcanvas-title">Heading</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <h4>Filters</h4>
+            <select id="price-filter" class="form-select">
+                <option value="">Select Price</option>
+                <option value="0-50">$0 - $50</option>
+                <option value="51-100">$51 - $100</option>
+                <option value="101-200">$101 - $200</option>
+                <option value="201+">$201+</option>
+            </select>
+    
+            <select id="category-filter" class="form-select">
+                <option value="">Select Category</option>
+                <option value="beauty">Beauty</option>
+                <option value="furniture">Furniture</option>
+                <option value="groceries">Food Groceries</option>
+                <option value="fragrances">Fragrances</option>
+            </select>
+    
+            <select id="brand-filter" class="form-select">
+                <option value="">Select Brand</option>
+                <option value="apple">Apple</option>
+                <option value="samsung">Samsung</option>
+                <option value="nike">Nike</option>
+            </select>
+          <button class="btn btn-secondary" type="button">A Button</button>
+        </div>
+      </div>
+      
+      <div class="container-fluid mt-3">
+        <h3>Offcanvas Sidebar</h3>
+        <p>Offcanvas is similar to modals, except that it is often used as a sidebar.</p>
+        <button class="btn btn-outline-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+          Open Offcanvas Sidebar
+        </button>
+      </div>
 
     <div class="main-content">
         <h1 class="text-center mb-4" style="padding-top: 90px; color: #795A19;">Product List</h1>
