@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #A1D1B1;
+        }
+
+        /* .navbar {
+            z-index: 999;
+            position: fixed;
+            width: 100%;
+            top: 0;
+        } */
+        .navbar {
+            position: fixed;
+            font-family: monospace;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+        }
+
+        .transparent-navbar {
+            background-color: #1c2529a9;
+            box-shadow: none;
+        }
+
+        .navbar-brand {
+            font-size: 55px;
+            padding-left: 2%;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #AA7E3E;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #795A19;
+        }
+
+
+        .hero {
+            height: 105vh;
+            background-image: url(img/Hero.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            /* background: linear-gradient(135deg, #1C2529 50%, #A1D1B1 50%); */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .hero .text-container {
+            color: white;
+            padding-left: 100px;
+            font-size: 24px;
+            z-index: 999;
+        }
+
+        @media (max-width: 768px) {
+            .hero .text-container {
+                padding-left: 60px;
+              
+            }
+        }
+
+
+        .card {
+            width: 18rem;
+            height: 400px;
+            margin-left: 58%;
+            background-color: black;
+            opacity: 0;
+            animation: moveInDirection 5s ease-in-out infinite;
+            position: absolute;
+           
+        }
+
+        @media (max-width: 2400px) {
+            .card.second-set {
+                display: none;
+            }
+
+        }
+
+        @media (max-width: 2400px) {
+            .card {
+                display: none;
+            }
+
+        }
+
+        .card.second-set {
+            margin-left: 90%;
+            animation: moveInOppositeDirection 5s ease-in-out infinite;
+        }
+
+        .card.second-set.second-card {
+            animation-delay: 1.5s;
+        }
+
+        .card.second-set.third-card {
+            animation-delay: 3s;
+        }
+
+        .card.second-card {
+            animation-delay: 1.5s;
+          
+        }
+
+        .card.third-card {
+            animation-delay: 3s;
+        }
+
+        @keyframes moveInDirection {
+            0% {
+                transform: rotate(225deg) translate(0vw, -110vh);
+                opacity: 1;
+            }
+
+            100% {
+                transform: rotate(225deg) translate(0vw, 180vh);
+                opacity: 1;
+            }
+        }
+
+        @keyframes moveInOppositeDirection {
+            0% {
+                transform: rotate(45deg) translate(0vw, -100vh);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            20% {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            80% {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            100% {
+                transform: rotate(45deg) translate(0vw, 180vh);
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        .body-content {
+            margin-top: 100vh;
+            padding: 20px;
+            z-index: 990;
+            position: relative;
+            height: auto;
+        }
+
+        .body-content {
+            margin-top: 100vh;
+            /* Add margin to push content below the hero section */
+            padding: 20px;
+        }
+
+        .custom-main-card {
+            background-color: rgb(24, 23, 23);
+            border: 1px solid #AA7E3E;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .custom-main-card:hover {
+            transform: scale(1.05);
+        }
+
+        .custom-card-img-top {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+
+        }
+
+        .custom-card-body {
+            padding: 20px;
+        }
+
+        .custom-card-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #AA7E3E;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+
+        .custom-main-card .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .custom-main-card .col-3 {
+            padding: 10px;
+        }
+
+        .custom-main-card .col-3 img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .custom-main-card .col-3 img:hover {
+            transform: scale(1.1);
+        }
+
+        .custom-main-card .col-3 p {
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+        }
+
+        .product-details {
+            z-index: 990;
+        }
+
+        .modern-card-link {
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .modern-card {
+            width: 250px;
+            height: 300px;
+            border-radius: 20px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            border: 2px solid #795A19;
+            transition: 0.5s ease-out;
+            overflow: hidden;
+        }
+
+
+        .modern-card:hover {
+            border-color: #AA7E3E;
+            box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+        }
+
+        .modern-card button {
+            transform: translate(-50%, 125%);
+            width: 60%;
+            border-radius: 1rem;
+            border: none;
+            background-color: #795A19;
+            color: #fff;
+            font-size: 1rem;
+            padding: .5rem 1rem;
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            opacity: 0;
+            transition: 0.3s ease-out;
+        }
+
+        .modern-card:hover button {
+            transform: translate(-50%, 10%);
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav> -->
+    <nav class="navbar navbar-expand-lg navbar-dark transparent-navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <span style="color: #AA7E3E;">Lux</span><span style="color: #795A19;">ora</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link nav-text" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-text" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-text" href="#">Contact us</a>
+                    </li>
+                    <li>
+                        <a class="nav-link nav-text" href="cart.html"><i class="fa fa-shopping-cart"
+                                style="font-size:38px;color:rgb(255, 255, 255)"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <div class="hero">
+        <!-- Text on the left -->
+        <div class="text-container">
+            <h1>Shop <span></span></h1>
+        </div>
+
+        <!-- First Card -->
+        <div class="card"
+            style="background-image: url('https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=600'); width: 20rem; height: 450px; ; background-size: cover; background-position: center; background-repeat: no-repeat; position: absolute; ; overflow: hidden; transform: rotate(45deg);">
+            <img src="" class="card-img-top" alt="..." style="display: none;">
+        </div>
+
+
+        <!-- Second Card -->
+        <div class="card second-card"
+            style="background-image: url('https://cdn.pixabay.com/photo/2014/07/31/23/00/wristwatch-407096_1280.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 300px; height: 400px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        </div>
+
+
+        <div class="card third-card">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">Some more example text to build on the card title and make up the bulk of the
+                    second card's content.</p>
+            </div>
+        </div>
+        <div class="card second-set">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">Another quick example text.</p>
+            </div>
+        </div>
+
+        <div class="card second-set second-card">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">More opposite example text.</p>
+            </div>
+        </div>
+
+        <div class="card second-set third-card">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">Some more opposite example text.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Body Content Section (hidden initially) -->
+    <div class="body-content" id="body-content" style="height: auto; background-color: #1C2529;">
+        <center>
+            <h2 style="color: #795A19; padding: 10px;">Shop from</h2>
+        </center>
+        <div class="row">
+            <div class="col-md-3">
+                <a href="productStore.html">
+                    <div class="custom-main-card">
+                        <img src="https://cdn.pixabay.com/photo/2022/09/08/19/24/watch-7441766_640.jpg"
+                            class="custom-card-img-top" alt="Main Card 1">
+                        <div class="custom-card-body">
+                            <h5 class="custom-card-title">Men</h5>
+                            <div class="row">
+                                <div class="col-3">
+                                    <a href="productStore.html"><img
+                                            src="https://cdn.pixabay.com/photo/2015/02/14/02/20/wedding-636021_1280.jpg"
+                                            alt="Sub Card 1"></a>
+                                    <p style="color: #795A19;">Tuxedo</p>
+                                </div>
+                                <div class="col-3">
+                                    <a href="productStore.html"><img
+                                            src="https://cdn.pixabay.com/photo/2021/05/04/06/34/kaizen-wallet-6227840_1280.jpg"
+                                            alt="Sub Card 2"></a>
+                                    <p style="color: #795A19;">Wallet</p>
+                                </div>
+                                <div class="col-3">
+                                    <a href="productStore.html"><img
+                                            src="https://cdn.pixabay.com/photo/2013/07/11/15/30/male-watch-144648_1280.jpg"
+                                            alt="Sub Card 3"></a>
+                                    <p style="color: #795A19;">Watch</p>
+                                </div>
+                                <div class="col-3">
+                                    <a href="productStore.html"><img
+                                            src="https://cdn.pixabay.com/photo/2019/07/18/07/04/shoes-4345636_640.jpg"
+                                            alt="Sub Card 4"></a>
+                                    <p style="color: #795A19;">Shoes</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+            <div class="col-md-3">
+                <a href="productStore.html">
+                    <div class="custom-main-card">
+                        <img src="https://cdn.pixabay.com/photo/2023/02/23/10/16/ai-generated-7808452_640.jpg"
+                            class="custom-card-img-top" alt="Main Card 4">
+                        <div class="custom-card-body">
+                            <h5 class="custom-card-title">Women</h5>
+                            <div class="row">
+                                <div class="col-3">
+                                    <a href="productStore.html"><img
+                                            src="https://cdn.pixabay.com/photo/2022/05/22/16/50/outdoors-7213961_640.jpg"
+                                            alt="Sub Card 1"></a>
+                                    <p style="color: #795A19;">Hats</p>
+                                </div>
+                                <div class="col-3">
+                                    <a href="productStore.html"><img
+                                            src="https://cdn.pixabay.com/photo/2016/01/18/21/02/watch-time-1147449_640.jpg"
+                                            alt="Sub Card 2"></a>
+                                    <p style="color: #795A19;">Watch</p>
+                                </div>
+                                <div class="col-3">
+                                    <a href="productStore.html"><img
+                                            src="https://cdn.pixabay.com/photo/2018/12/05/13/41/woman-3857758_640.jpg"
+                                            alt="Sub Card 3"></a>
+                                    <p style="color: #795A19;">Footwear</p>
+                                </div>
+                                <div class="col-3">
+                                    <a href="productStore.html"><img
+                                            src="https://cdn.pixabay.com/photo/2021/11/15/05/25/boutique-6796399_1280.jpg"
+                                            alt="Sub Card 4"></a>
+                                    <p style="color: #795A19;">Cloths</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="productStore.html">
+                    <div class="custom-main-card">
+                        <img src="https://cdn.pixabay.com/photo/2021/10/10/21/52/makeup-6698881_640.jpg"
+                            class="custom-card-img-top" alt="Main Card 2">
+                        <div class="custom-card-body">
+                            <h5 class="custom-card-title">Beauty</h5>
+                            <div class="row">
+                                <div class="col-3">
+                                    <a href="productStore.html"><img
+                                            src="https://cdn.pixabay.com/photo/2017/03/02/02/57/glasses-2110282_1280.jpg"
+                                            alt="Sub Card 1"></a>
+                                    <p style="color: #795A19;">Glasses</p>
+                                </div>
+                                <div class="col-3">
+                                    <a href="productStore.html"><img
+                                            src="https://cdn.pixabay.com/photo/2019/07/24/19/42/cosmetics-4361044_1280.jpg"
+                                            alt="Sub Card 2"></a>
+                                    <p style="color: #795A19;">Skin care</p>
+                                </div>
+                                <div class="col-3">
+                                    <a href="productStore.html"><img
+                                            src="https://cdn.pixabay.com/photo/2017/05/28/09/44/woman-2350565_640.jpg"
+                                            alt="Sub Card 3"></a>
+                                    <p style="color: #795A19;">Hair</p>
+                                </div>
+                                <div class="col-3">
+                                    <a href="productStore.html"><img
+                                            src="https://cdn.pixabay.com/photo/2019/11/29/10/03/perfume-4660970_1280.jpg"
+                                            alt="Sub Card 4"></a>
+                                    <p style="color: #795A19;">Fragrance</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="productStore.html">
+                    <div class="custom-main-card">
+                        <img src="https://cdn.pixabay.com/photo/2016/03/26/13/09/workspace-1280538_1280.jpg"
+                            class="custom-card-img-top" alt="Main Card 4">
+                        <div class="custom-card-body">
+                            <h5 class="custom-card-title">Gadgets</h5>
+                            <div class="row">
+                                <div class="col-3">
+                                    <a href="productStore.html"><img
+                                            src="https://cdn.pixabay.com/photo/2016/11/29/05/08/apple-1867461_640.jpg"
+                                            alt="Sub Card 1"></a>
+                                    <p style="color: #795A19;">Mobiles</p>
+                                </div>
+                                <div class="col-3">
+                                    <a href="productStore.html"><img
+                                            src="https://cdn.pixabay.com/photo/2020/10/21/18/07/laptop-5673901_640.jpg"
+                                            alt="Sub Card 2"></a>
+                                    <p style="color: #795A19;">Laptops</p>
+                                </div>
+                                <div class="col-3">
+                                    <a href="productStore.html"><img
+                                            src="https://cdn.pixabay.com/photo/2022/02/10/10/18/earphones-7005009_1280.jpg"
+                                            alt="Sub Card 3"></a>
+                                    <p style="color: #795A19;">Music</p>
+                                </div>
+                                <div class="col-3">
+                                    <a href="productStore.html"><img
+                                            src="https://cdn.pixabay.com/photo/2016/07/21/15/19/game-controller-1532747_640.jpg"
+                                            alt="Sub Card 4"></a>
+                                    <p style="color: #795A19;">Gaming</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+
+        </div>
+        <div class="product-details">
+            <center>
+                <h1 style="color: #795A19; padding: 40px;">Top sellers</h1>
+            </center>
+            <div class="container">
+                <div class="row">
+                    <!-- First Row of Cards -->
+                    <div class="col-12 col-md-3 mb-4">
+                        <a href="productStore.html" class="modern-card-link">
+                            <div class="modern-card"
+                                style="background-image: url('https://cdn.pixabay.com/photo/2022/09/08/19/24/watch-7441766_640.jpg');">
+                                <button class="button">More info</button>
+                            </div>
+                        </a>
+                    </div>
+        
+                    <div class="col-12 col-md-3 mb-4">
+                        <a href="productStore.html" class="modern-card-link">
+                            <div class="modern-card"
+                                style="background-image: url('https://cdn.pixabay.com/photo/2022/09/08/19/24/watch-7441766_640.jpg');">
+                                <button class="button">More info</button>
+                            </div>
+                        </a>
+                    </div>
+        
+                    <div class="col-12 col-md-3 mb-4">
+                        <a href="productStore.html" class="modern-card-link">
+                            <div class="modern-card"
+                                style="background-image: url('https://cdn.pixabay.com/photo/2022/09/08/19/24/watch-7441766_640.jpg');">
+                                <button class="button">More info</button>
+                            </div>
+                        </a>
+                    </div>
+        
+                    <div class="col-12 col-md-3 mb-4">
+                        <a href="productStore.html" class="modern-card-link">
+                            <div class="modern-card"
+                                style="background-image: url('https://cdn.pixabay.com/photo/2022/09/08/19/24/watch-7441766_640.jpg');">
+                                <button class="button">More info</button>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+        
+                <!-- Second Row of Cards -->
+                <div class="row">
+                    <div class="col-12 col-md-3 mb-4">
+                        <a href="productStore.html" class="modern-card-link">
+                            <div class="modern-card"
+                                style="background-image: url('https://cdn.pixabay.com/photo/2022/09/08/19/24/watch-7441766_640.jpg');">
+                                <button class="button">More info</button>
+                            </div>
+                        </a>
+                    </div>
+        
+                    <div class="col-12 col-md-3 mb-4">
+                        <a href="productStore.html" class="modern-card-link">
+                            <div class="modern-card"
+                                style="background-image: url('https://cdn.pixabay.com/photo/2022/09/08/19/24/watch-7441766_640.jpg');">
+                                <button class="button">More info</button>
+                            </div>
+                        </a>
+                    </div>
+        
+                    <div class="col-12 col-md-3 mb-4">
+                        <a href="productStore.html" class="modern-card-link">
+                            <div class="modern-card"
+                                style="background-image: url('https://cdn.pixabay.com/photo/2022/09/08/19/24/watch-7441766_640.jpg');">
+                                <button class="button">More info</button>
+                            </div>
+                        </a>
+                    </div>
+        
+                    <div class="col-12 col-md-3 mb-4">
+                        <a href="productStore.html" class="modern-card-link">
+                            <div class="modern-card"
+                                style="background-image: url('https://cdn.pixabay.com/photo/2022/09/08/19/24/watch-7441766_640.jpg');">
+                                <button class="button">More info</button>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="newarrival" style="height: 500px;">
+            <div class="container-fluid" style="height: 100%;">
+                <div class="row" style="height: 100%;">
+                    <div class="col-12" style="height: 100%; padding: 0;">
+                        <video width="100%" height="100%" autoplay muted loop style="object-fit: cover; border: none;">
+                            <source src="vid/Cinematic_Product_Shoot_At_Home___SEIKO___Watch_Ad_Film__(720p).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+<footer class="text-center text-lg-start text-white" style="background-color: #3e4551; width: 100%; padding: 20px 0;">
+
+    <div class="container-fluid p-4 pb-0">
+
+      <section>
+
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">FOOTER CONTENT</h5>
+  
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Molestiae modi cum ipsam ad, illo possimus laborum ut
+              reiciendis obcaecati. Ducimus, quas. Corrupti, pariatur eaque?
+              Reiciendis assumenda iusto sapiente inventore animi?
+            </p>
+          </div>
+
+          <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Links</h5>
+  
+            <ul class="list-unstyled mb-0">
+              <li><a href="#!" class="text-white">Link 1</a></li>
+              <li><a href="#!" class="text-white">Link 2</a></li>
+              <li><a href="#!" class="text-white">Link 3</a></li>
+              <li><a href="#!" class="text-white">Link 4</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Links</h5>
+  
+            <ul class="list-unstyled mb-0">
+              <li><a href="#!" class="text-white">Link 1</a></li>
+              <li><a href="#!" class="text-white">Link 2</a></li>
+              <li><a href="#!" class="text-white">Link 3</a></li>
+              <li><a href="#!" class="text-white">Link 4</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Links</h5>
+  
+            <ul class="list-unstyled mb-0">
+              <li><a href="#!" class="text-white">Link 1</a></li>
+              <li><a href="#!" class="text-white">Link 2</a></li>
+              <li><a href="#!" class="text-white">Link 3</a></li>
+              <li><a href="#!" class="text-white">Link 4</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Links</h5>
+  
+            <ul class="list-unstyled mb-0">
+              <li><a href="#!" class="text-white">Link 1</a></li>
+              <li><a href="#!" class="text-white">Link 2</a></li>
+              <li><a href="#!" class="text-white">Link 3</a></li>
+              <li><a href="#!" class="text-white">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <hr class="mb-4" />
+  
+      <section>
+        <p class="d-flex justify-content-center align-items-center">
+          <span class="me-3">Register for free</span>
+          <button type="button" class="btn btn-outline-light btn-rounded">Sign up!</button>
+        </p>
+      </section>
+      <hr class="mb-4" />
+  
+      <section class="mb-4 text-center">
+
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
+  
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-twitter"></i></a>
+  
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-google"></i></a>
+  
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-instagram"></i></a>
+  
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
+  
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-github"></i></a>
+      </section>
+    </div>
+
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+      © 2020 Copyright: <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    </div>
+  </footer>
+  
+                    <script>
+
+                        const dynamicText = document.querySelector("h1 span");
+                        const words = ["The Future", "the Luxary", "at Luxora"];
+
+                        let wordIndex = 0;
+                        let charIndex = 0;
+                        let isDeleting = false;
+
+                        const typeEffect = () => {
+                            let currentWord = words[wordIndex];
+
+                            if (currentWord.includes("Luxora")) {
+                                let typedText = currentWord.substring(0, charIndex);
+
+                                if (charIndex >= currentWord.length) {
+                                    typedText = typedText.replace('Luxora',
+                                        '<span style="color: #AA7E3E;">Lux</span><span style="color: #795A19;">ora</span>');
+                                }
+                                dynamicText.innerHTML = typedText;
+                            } else {
+                                dynamicText.textContent = currentWord.substring(0, charIndex);
+                            }
+
+                            dynamicText.classList.add("stop-blinking");
+
+                            if (!isDeleting && charIndex < currentWord.length) {
+                                charIndex++;
+                                setTimeout(typeEffect, 200);
+                            } else if (isDeleting && charIndex > 0) {
+                                charIndex--;
+                                setTimeout(typeEffect, 100);
+                            } else {
+                                isDeleting = !isDeleting;
+                                dynamicText.classList.remove("stop-blinking");
+                                wordIndex = !isDeleting ? (wordIndex + 1) % words.length : wordIndex;
+                                setTimeout(typeEffect, 1200);
+                            }
+                        }
+
+                        typeEffect();
+                    </script>
+</body>
+
+</html>

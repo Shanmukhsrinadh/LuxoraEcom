@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="Styles/navbar.css">
+</head>
+
+<style>
+    body {
+        background-color: #1C2529;
+    }
+
+    .navbar {
+        position: fixed;
+        font-family: monospace;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        height: 60px;
+    }
+
+    .transparent-navbar {
+        background-color: #1c2529f5;
+        box-shadow: none;
+    }
+
+    .navbar-brand {
+        font-size: 55px;
+        padding-left: 2%;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #AA7E3E;
+        transition: color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #795A19;
+    }
+
+    @media (max-width: 768px) {
+        .navbar-brand {
+            font-size: 40px;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 1rem;
+        }
+
+        .container {
+            padding-top: 100px;
+        }
+    }
+
+    .navbar {
+        position: fixed;
+        font-family: monospace;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        height: 60px;
+    }
+
+    .transparent-navbar {
+        background-color: #1c2529f5;
+        box-shadow: none;
+    }
+
+    .navbar-brand {
+        font-size: 55px;
+        padding-left: 2%;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #AA7E3E;
+        transition: color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #795A19;
+    }
+
+    .card {
+        background-color: rgb(14, 31, 22);
+        color: #fff;
+        border: 1px solid #444;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .card-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #AA7E3E;
+    }
+
+    .card-text {
+        color: #ddd;
+    }
+
+    .card-footer {
+        background-color: #444;
+        color: #bbb;
+    }
+
+    .card-footer a {
+        color: #AA7E3E;
+    }
+
+    .card-footer a:hover {
+        color: #795A19;
+    }
+
+    @media (max-width: 768px) {
+        .navbar-brand {
+            font-size: 40px;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 1rem;
+        }
+
+        .container {
+            padding-top: 100px;
+        }
+    }
+    
+</style>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark transparent-navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <span style="color: #AA7E3E;">Lux</span><span style="color: #795A19;">ora</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link nav-text" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-text" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-text" href="#">Contact us</a>
+                    </li>
+                    <li>
+                        <a class="nav-link nav-text" href="cart.html"><i class="fa fa-shopping-cart"
+                                style="font-size:38px;color:rgb(255, 255, 255)"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-4" style="padding-top: 120px;">
+        <div id="product-details" class="row"></div>
+
+        <div id="category-products" class="mt-5">
+            <center>
+                <h1 style="color: #795A19;">Similar products</h1>
+            </center>
+            <h3>Products from the Same Category</h3>
+            <div class="row" id="category-products-list"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            const productDetailsContainer = document.getElementById('product-details');
+
+            fetch('https://dummyjson.com/products/' + productId)
+                .then(response => response.json())
+                .then(product => {
+                    const productCategory = product.category;
+
+                    const productCard = document.createElement('div');
+                    productCard.className = 'col-md-12 mb-4';
+                    productCard.innerHTML = `
+                        <div class="card shadow-sm">
+                            <div class="row g-0">
+                                <div class="col-md-6">
+                                    <img src="${product.thumbnail}" class="card-img-top" alt="Image of ${product.title}">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${product.title}</h5>
+                                        <p class="card-text">${product.description}</p>
+                                        <p class="text-primary fw-bold">$${product.price}</p>
+                                        <p><strong>Brand:</strong> ${product.brand}</p>
+                                        <p><strong>Category:</strong> ${product.category}</p>
+                                        <p><strong>Rating:</strong> ${product.rating} stars</p>
+                                        <p><strong>Stock:</strong> ${product.stock} items</p>
+                                        <p><strong>Discount:</strong> ${product.discountPercentage}% off</p>
+                                        <p><strong>warrantyInformation:</strong> ${product.warrantyInformation}</p>
+                                        <p><strong>shippingInformation:</strong> ${product.shippingInformation}</p>
+                                        <p><strong>availabilityStatus:</strong> ${product.availabilityStatus}</p>
+                                        <p><strong>tags:</strong> ${product.tags}</p>
+
+                                        <br>
+                                        <button class="btn btn-primary add-to-cart">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    productDetailsContainer.appendChild(productCard);
+
+                    document.querySelector('.add-to-cart').addEventListener('click', function () {
+                        const cartItem = {
+                            id: product.id,
+                            name: product.title,
+                            description: product.description,
+                            price: '$' + product.price,
+                            thumbnail: product.thumbnail
+                        };
+
+                        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                        cart.push(cartItem);
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        alert(`${product.title} has been added to your cart.`);
+                    });
+
+                    fetch('https://dummyjson.com/products')
+                        .then(response => response.json())
+                        .then(data => {
+                            const categoryProductsList = document.getElementById('category-products-list');
+                            data.products.forEach(categoryProduct => {
+                                if (categoryProduct.id !== productId && categoryProduct.category === productCategory) {
+                                    const categoryProductCard = document.createElement('div');
+                                    categoryProductCard.className = 'col-md-3 mb-4';
+                                    categoryProductCard.innerHTML = `
+                                        <div class="card shadow-sm">
+                                            <img src="${categoryProduct.thumbnail}" class="card-img-top" alt="Image of ${categoryProduct.title}">
+                                            <div class="card-body">
+                                                <h5 class="card-title">${categoryProduct.title}</h5>
+                                                <p class="text-primary fw-bold">$${categoryProduct.price}</p>
+                                                <a href="product.html?id=${categoryProduct.id}" class="btn btn-info">Learn More</a>
+                                            </div>
+                                        </div>
+                                    `;
+                                    categoryProductsList.appendChild(categoryProductCard);
+                                }
+                            });
+                        })
+                        .catch(error => console.error('Error fetching products from the same category:', error));
+                })
+                .catch(error => console.error('Error fetching product details:', error));
+        });
+    </script>
+
+</body>
+
+</html>
